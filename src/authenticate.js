@@ -1,6 +1,7 @@
 
 let Bluebird  = require('bluebird');
 let request   = Bluebird.promisifyAll(require('request'));
+let AWS       = require('aws-sdk');
 
 async function authenticate({ username, customerNo, password }) {
   let jar = request.jar();
@@ -22,21 +23,30 @@ async function authenticate({ username, customerNo, password }) {
       'Origin': 'https://retailerservices.diamondcomics.com'
     }
   };
-
   await request.postAsync(opts);
-  return jar;
+
+  // serilize
+  let serialized = jar._jar.serializeSync();
+  console.log(serialized);
+
+  // write to db for resuse
+  let db = Bluebird.promisifyAll(new AWS.DynamoDB.DocumentClient());
+  let params = {
+    TableName: 'ssc-image-processing',
+    Item: {
+      stock_no: 'auth',
+      cookies: serialized
+    }
+  };
+  await db.putAsync(params);
 }
 
 exports.handler = function(event, context) {
   authenticate(event)
-  .then((jar) => {
-    return jar._jar.serializeSync();
-  })
-  .then((jar) => context.succeed(jar))
+  .then(() => context.succeed())
   .catch((err) => {
     console.log(err);
     context.fail(err.stack || err.message || err);
   });
-
 };
 
