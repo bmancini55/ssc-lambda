@@ -1,0 +1,14 @@
+
+module.exports = {
+  diamond: {
+    "username": "",
+    "customerNo": "",
+    "password": ""
+  },
+  aws: {
+    accessKeyId: "",
+    secretAccessKey: "",
+    s3Bucket: ""
+  }
+
+};

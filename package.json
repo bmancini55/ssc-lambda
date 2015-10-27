@@ -1,0 +1,17 @@
+{
+  "name": "aws-lambda",
+  "version": "0.1.0",
+  "description": "",
+  "main": "ssc-import-fetch-diamond.js",
+  "scripts": {
+    "build": "babel --stage 1 --optional runtime src --out-dir ./"
+  },
+  "author": "Brian <bmancini@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-runtime": "^5.8.29",
+    "bluebird": "^2.10.2",
+    "memory-streams": "^0.1.0",
+    "request": "^2.65.0"
+  }
+}
