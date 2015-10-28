@@ -35,7 +35,7 @@ async function authenticate({ username, customerNo, password }) {
     TableName: 'ssc-image-processing',
     Item: {
       stock_no: 'auth',
-      cookies: serialized
+      jar: JSON.stringify(serialized)
     }
   };
   await db.putAsync(params);

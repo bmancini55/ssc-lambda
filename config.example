@@ -6,9 +6,10 @@ module.exports = {
     "password": ""
   },
   aws: {
-    accessKeyId: "",
-    secretAccessKey: "",
-    s3Bucket: ""
+    "accessKeyId": "",
+    "secretAccessKey": "",
+    "region": "us-east-1",
+    "s3Bucket": ""
   }
 
 };
