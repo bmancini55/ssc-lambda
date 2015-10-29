@@ -4,21 +4,19 @@ let path         = require('path');
 let fs           = require('fs');
 let AWS          = require('aws-sdk');
 let request      = Bluebird.promisifyAll(require('request'));
+let deepcopy     = require('deepcopy');
 let authenticate = require('./helper-auth-jar');
+let config       = require('./config');
 
 
-exports.handler = function(event, context) {
-  handler(event, context)
-  .catch((err) => {
-    console.log(err);
-    context.fail(err.stack || err.message || err);
-  });
-};
+
+module.exports = download;
 
 
-async function handler(event, context) {
-  let { stock_no } = event;
-  let { s3Bucket } = event;
+async function download(record) {
+
+  let { stock_no } = record;
+  let { s3Bucket } = config.aws;
 
   let filePath = 'test/items/' + stock_no + '.jpg';
 
@@ -28,11 +26,15 @@ async function handler(event, context) {
   let buffer = await fetch({ stock_no, jar });
   console.log('Image buffer downloaded %d', buffer.length);
 
-  let result = await upload({ filePath, buffer, s3Bucket });
+  await upload({ filePath, buffer, s3Bucket });
   console.log('File has been uploaded to %s', filePath);
 
-  context.succeed(result);
+
+  let result = deepcopy(record);
+  result.hasRaw = true;
+  return result;
 }
+
 
 
 async function fetch({ stock_no, jar }) {

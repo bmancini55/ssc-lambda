@@ -3,6 +3,8 @@ let Bluebird  = require('bluebird');
 let request   = Bluebird.promisifyAll(require('request'));
 let AWS       = require('aws-sdk');
 
+module.exports = authenticate;
+
 async function authenticate({ username, customerNo, password }) {
   let jar = request.jar();
   let opts = {
@@ -40,13 +42,4 @@ async function authenticate({ username, customerNo, password }) {
   };
   await db.putAsync(params);
 }
-
-exports.handler = function(event, context) {
-  authenticate(event)
-  .then(() => context.succeed())
-  .catch((err) => {
-    console.log(err);
-    context.fail(err.stack || err.message || err);
-  });
-};
 

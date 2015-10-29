@@ -13,7 +13,12 @@ async function getAuthCache() {
     Key: { stock_no: { 'S': 'auth' }}
   });
 
-  let serializedJar = JSON.parse(result.Item.jar.S);
-  let jar = CookieJar.deserializeSync(serializedJar);
-  return jar;
+  if(result && result.Item) {
+    let serializedJar = JSON.parse(result.Item.jar.S);
+    let jar = CookieJar.deserializeSync(serializedJar);
+    return jar;
+  }
+  else {
+    return null;
+  }
 }
