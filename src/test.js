@@ -1,14 +1,16 @@
 
-let AWS = require('aws-sdk');
-let config = require('./config');
-let authenticate = require('./helper-auth-jar');
-let download = require('./download');
+let AWS          = require('aws-sdk');
+let config       = require('./config');
+let download     = require('./step-download');
+let resize       = require('./step-resize');
 
 async function exex() {
   AWS.config.update(config.aws);
 
-  download.handler({ stock_no: 'STK691703', s3Bucket: config.aws.s3Bucket });
+  //download.handler({ stock_no: 'STK691703', s3Bucket: config.aws.s3Bucket });
+
+  await resize({ stock_no: 'STK675849' });
 
 }
 
-exex();
+exex().catch(console.log);
