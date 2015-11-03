@@ -9,7 +9,7 @@ async function exex() {
 
   //download.handler({ stock_no: 'STK691703', s3Bucket: config.aws.s3Bucket });
 
-  await resize({ stock_no: 'STK675849' });
+  await resize({ stock_no: 'STK678055' }, 100);
 
 }
 

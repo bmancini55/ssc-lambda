@@ -20,10 +20,11 @@ async function process(record, width) {
   // load image
   let image = await loadImage(sourceFilePath);
   if(!image) return record;
+  console.log('Found image of size: %d', image.length);
 
   // process image
   let buffer = await resizeImage(image, width);
-  console.log(buffer);
+  console.log('Resized to: %d', buffer.length);
 
   // upload resized
   let destFilePath = path.join(destFolder, fileName + '_' + width + ext);
@@ -51,7 +52,7 @@ async function loadImage(sourceFilePath) {
 
 async function resizeImage(buffer, width) {
   return new Promise((resolve, reject) => {
-    gm(buffer, 'image.jpg')
+    gm(buffer)
     .resize(width)
     .toBuffer('JPG', (err, buffer2) => {
       if(err) reject(err);

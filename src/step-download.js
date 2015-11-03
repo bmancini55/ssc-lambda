@@ -5,7 +5,7 @@ let fs           = require('fs');
 let AWS          = require('aws-sdk');
 let request      = Bluebird.promisifyAll(require('request'));
 let deepcopy     = require('deepcopy');
-let authenticate = require('./helper-auth-jar');
+let authenticate = require('./step-authenticate');
 let config       = require('./config');
 
 
@@ -20,7 +20,7 @@ async function download(record) {
 
   let filePath = 'test/items/' + stock_no + '.jpg';
 
-  let jar    = await authenticate();
+  let jar = await authenticate(config.diamond);
   console.log('Successfully authenticated');
 
   let buffer = await fetch({ stock_no, jar });
@@ -47,7 +47,7 @@ async function fetch({ stock_no, jar }) {
     // make request
     let opts = {
       url: 'https://retailerservices.diamondcomics.com/Image/Resource/1/' + stock_no,
-      jar: request.jar(jar.store),
+      jar: jar,
       followRedirect: false,
       headers: {
         'UserAgent': 'Mozilla / 5.0(Windows NT 6.1; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 42.0.2311.135 Safari / 537.36',
