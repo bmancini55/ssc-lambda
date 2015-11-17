@@ -7,7 +7,7 @@ let sqs        = new AWS.SQS(config.aws);
 let lambda     = new AWS.Lambda(config.aws);
 
 function run() {
-  sqs.receiveMessage({ QueueUrl: queueUrl, WaitTimeSeconds: 10 }, (err, data) => {
+  sqs.receiveMessage({ QueueUrl: queueUrl, MaxNumberOfMessages: 10 }, (err, data) => {
     if(err) {
       console.log('Error %j', err);
     } else {

@@ -4,7 +4,11 @@ const sqs = new AWS.SQS();
 
 module.exports = function(pipelineName, router) {
 
-   return (event, context) => handler(event, context).catch(context.fail);
+   return (event, context) => handler(event, context)
+   .catch(() => {
+      handleError(event);
+      context.fail();
+    });
 
    // {
    //   "MessageId":"4cba8f82-25b8-4eb5-ba9a-7d6f4ff8d6d7",
@@ -62,6 +66,14 @@ module.exports = function(pipelineName, router) {
         else    resolve();
       });
     });
+  }
+
+  function handleError(event) {
+    // get the record from the event
+    let record = getRecord(event);
+
+    // queue next stage
+    enqueueRecord(record);
   }
 
 };

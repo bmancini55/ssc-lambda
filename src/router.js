@@ -16,19 +16,19 @@ async function router(record) {
   }
 
   if(!record.size_100) {
-    return await resize(record, 100);
+    record = await resize(record, 100);
   }
 
   if(!record.size_200) {
-    return await resize(record, 200);
+    record = await resize(record, 200);
   }
 
   if(!record.size_300) {
-    return await resize(record, 300);
+    record = await resize(record, 300);
   }
 
   if(!record.size_400) {
-    return await resize(record, 400);
+    record = await resize(record, 400);
   }
 
   return null;
