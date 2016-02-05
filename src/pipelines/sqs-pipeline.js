@@ -1,3 +1,14 @@
+/**
+ * Processing pipeline using SQS. SQS does not support pushing
+ * lambda functions and requires an Agent that will call the lambda
+ * functions when there is an event in the pipeline.
+ *
+ * This pipline will do the following:
+ * 1) extract the record from the event data
+ * 2) process the record via the supplied function router
+ * 3) enqueue the mutated record back into SQS
+ * 4) delete the current event from the SQS to indicate success
+ */
 
 const AWS = require('aws-sdk');
 const sqs = new AWS.SQS();

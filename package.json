@@ -5,8 +5,8 @@
   "main": "ssc-import-fetch-diamond.js",
   "scripts": {
     "build": "babel --stage 1 --optional runtime src --out-dir ./dist",
-    "produce": "node dist/sqs-produce.js",
-    "agent": "node dist/sqs-lambda.js",
+    "produce": "node dist/sqs-producer.js",
+    "agent": "node dist/sqs-agent.js",
     "zip": "zip -rq ../lambda.zip ./"
   },
   "author": "Brian <bmancini@gmail.com>",

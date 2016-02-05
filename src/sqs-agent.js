@@ -1,6 +1,11 @@
+/**
+ * This is the SQS agent that listens for events in the SQS queue
+ * and forwards them to the Lambda. At least one agent must be
+ * running for lambda functions to process.
+ */
 
 let AWS        = require('aws-sdk');
-let config     = require('./config');
+let config     = require('../config');
 let queueUrl   = config.aws.queueUrl;
 let lambdaName = config.aws.lambdaName;
 let sqs        = new AWS.SQS(config.aws);

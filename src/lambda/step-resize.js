@@ -1,10 +1,17 @@
+/**
+ * Resizes an image to the specified by doing the following:
+ * 1) loading the original image from S3
+ * 2) resizing the image using graphics magick
+ * 3) uploading the resized image to S3
+ * 4) update the state record
+ */
 
 let Bluebird = require('bluebird');
 let path     = require('path');
 let AWS      = require('aws-sdk');
 let gm       = require('gm').subClass({ imageMagick: true });
 let deepcopy = require('deepcopy');
-let config   = require('./config');
+let config   = require('../config');
 let s3       = Bluebird.promisifyAll(new AWS.S3());
 
 module.exports = process;

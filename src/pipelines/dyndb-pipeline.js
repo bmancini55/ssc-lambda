@@ -1,5 +1,14 @@
+/**
+ * Processing pipeline using DynamoDB records.  DynamoDB supports
+ * execution of Lambda functions upon state changes to DynamoDB records.
+ *
+ *
+ * 1) extract the record from the event data
+ * 2) process the record via the supplied function router
+ * 3) updates the record in DynamoDB
+ */
 
-const AWS          = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 module.exports = function(pipelineName, router) {
 

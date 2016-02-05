@@ -1,8 +1,8 @@
 
-let pipeline = require('./sqs-pipeline');
+let pipeline = require('../pipelines/sqs-pipeline');
 let download = require('./step-download');
 let resize   = require('./step-resize');
-let config   = require('./config');
+let config   = require('../config');
 let queueUrl = config.aws.queueUrl;
 
 
