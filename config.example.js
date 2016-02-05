@@ -9,7 +9,9 @@ module.exports = {
     "accessKeyId": "",
     "secretAccessKey": "",
     "region": "us-east-1",
-    "s3Bucket": ""
+    "s3Bucket": "",
+    "queueUrl": "",
+    "lambdaName": ""
   }
 
 };
