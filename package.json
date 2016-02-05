@@ -1,19 +1,22 @@
 {
-  "name": "aws-lambda",
+  "name": "ssc-lambda",
   "version": "0.1.0",
   "description": "",
   "main": "ssc-import-fetch-diamond.js",
   "scripts": {
-    "build": "babel --stage 1 --optional runtime src --out-dir ./"
+    "build": "babel --stage 1 --optional runtime src --out-dir ./dist",
+    "produce": "node dist/sqs-produce.js",
+    "agent": "node dist/sqs-lambda.js",
+    "zip": "zip -rq ../lambda.zip ./"
   },
   "author": "Brian <bmancini@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "babel-runtime": "^5.8.29",
+    "aws-sdk": "^2.2.33",
+    "babel": "^5.8.35",
     "bluebird": "^2.10.2",
     "deepcopy": "^0.5.0",
     "gm": "^1.21.1",
-    "memory-streams": "^0.1.0",
     "request": "^2.65.0"
   }
 }

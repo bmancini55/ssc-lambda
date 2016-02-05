@@ -34,5 +34,5 @@ node_modules
 Thumbs.db
 .DS_Store
 
-/*.js
-!/config.examples
+config.js
+/dist
