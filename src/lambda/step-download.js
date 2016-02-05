@@ -12,8 +12,7 @@ let fs           = require('fs');
 let AWS          = require('aws-sdk');
 let request      = Bluebird.promisifyAll(require('request'));
 let deepcopy     = require('deepcopy');
-let authenticate = require('./step-authenticate');
-let config       = require('../config');
+let config       = require('../../config');
 
 
 module.exports = download;

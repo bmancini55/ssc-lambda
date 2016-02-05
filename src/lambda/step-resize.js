@@ -11,7 +11,7 @@ let path     = require('path');
 let AWS      = require('aws-sdk');
 let gm       = require('gm').subClass({ imageMagick: true });
 let deepcopy = require('deepcopy');
-let config   = require('../config');
+let config   = require('../../config');
 let s3       = Bluebird.promisifyAll(new AWS.S3());
 
 module.exports = process;
